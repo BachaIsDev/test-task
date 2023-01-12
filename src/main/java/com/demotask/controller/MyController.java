@@ -24,6 +24,8 @@ public class MyController {
     public String calculatePath(@RequestParam("from") String from,
                                 @RequestParam("to") String to,
                                 @RequestParam("file") MultipartFile multipartFile) {
+
+        // Create a file to send it to the method parameter
         String fileName = "answer.txt";
         ClassLoader classLoader = getClass().getClassLoader();
 
