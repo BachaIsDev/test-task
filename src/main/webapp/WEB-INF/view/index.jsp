@@ -12,12 +12,12 @@
 
         <br><br>
 
-        From:
+        Start time:
         <input type="text" name="from">
 
         <br><br>
 
-        To:
+        End time:
         <input type="text" name="to">
 
         <button>Ok!</button>
