@@ -1,6 +1,7 @@
 package com.demotask.controller;
 
 import com.demotask.solver.SolveGps;
+import com.sun.istack.internal.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 
 @Controller
 @RequestMapping("/api")
@@ -23,7 +25,7 @@ public class MyController {
     @ResponseBody
     public String calculatePath(@RequestParam("from") String from,
                                 @RequestParam("to") String to,
-                                @RequestParam("file") MultipartFile multipartFile) {
+                                @NotNull @RequestParam("file") MultipartFile multipartFile) {
 
         // Create a file to send it to the method parameter
         String fileName = "answer.txt";
@@ -31,7 +33,7 @@ public class MyController {
 
         File file = new File(classLoader.getResource(fileName).getFile());
 
-        try (OutputStream os = new FileOutputStream(file)) {
+        try (OutputStream os = Files.newOutputStream(file.toPath())) {
             os.write(multipartFile.getBytes());
         }catch (IOException e){
             e.getStackTrace();
@@ -44,6 +46,6 @@ public class MyController {
             e.printStackTrace();
         }
 
-        return "Answer: " + answer;
+        return "Answer: " + answer + " km";
     }
 }
